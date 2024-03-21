@@ -12,7 +12,7 @@ This dataset captures key gameplay statistics and outcomes from a collection of 
 
 In the realm of League of Legends (LOL), the concept of **"first blood"** holds significant weight and serves as an important trajectory of a match. First blood refers to the initial first kill secured by a team during the early stages of a game. Beyond its immediate impact on the scoreboard, first blood sets the tone for the ensuing gameplay, often shaping the general dynamics, strategies, and outcomes of the match.
 
-The central question we are interested in is **Does the occurrence of the first blood influence the probability of winning a League of Legends match?** We want to use data analysis techniques to testify the impact of first blood on gaming statistics,  including individual player performance, team strategies, in-game metrics, and ultimately, match outcomes. 
+The central question we are interested in is **In what degree of effectiveness does the firstblood status has to other gaming statistics in the data set**. We want to use data analysis techniques to testify the impact of first blood on gaming statistics,  including individual player performance, team strategies, in-game metrics, and ultimately, match outcomes. 
 
 ### Introduction of Columns
 The dataset introduces a comprehensive array of columns featuring gameplay metrics and match outcomes from professional League of Legends esports matches. Here's an introduction to some of the key columns:
