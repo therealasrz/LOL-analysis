@@ -249,14 +249,6 @@ For the baseline model, we used a Random Forest Classifier, with the following t
 
 After fitting the model, our accuracy score on the training data is **0.79454**. This means that our model is able to correctly predict **79.454%** of data. This accuracy score may sound really high, but it is quite misleading since our data is unbalanced. The F-1 score of this model is **7.913%** which is extremely low. Such a low F-1 score is due to a small Recall of 0.044336, as our model has many false negatives. Our model still has large improvement space, and we will improve it through adding more features, and tuning hyperparameters in the next section. 
 
-Here is our confuse matrix from the baseline model.
-<iframe
-  src="assets/Matrix.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
-
 ## Final Model
 In our final model, we added two more features: `monsterkills` and `minionkills`. We are adding these two features into our model because we believe in the LOL game, the champions in jungle positions usually have higher damage, so they are able to kill more minions compared to other positions at the same amount of time. Moreover, the main job of the jungle position in the game is to kill the monsters, so we believe jungle positions should have a relatively high `monsterkills` number. Additionally, `minion kills` reflect a player's ability to efficiently farm gold and experience, which are crucial for scaling and gaining advantages in the game. Therefore, we expect that both monster kills and minion kills will provide valuable predictive power in our final model, allowing us to better understand the factors influencing victory in League of Legends matches.
 
