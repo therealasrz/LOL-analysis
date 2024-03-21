@@ -69,7 +69,7 @@ We permformed univariate analysis on the kill statistics in the dataset
   frameborder="0"
 ></iframe>
 
-The histogram shows that the distribution of team kills is nearly normal, slightly right skewed. The data in general is well-behaved!
+The histogram shows that the distribution of team kills is nearly normal, slightly right skewed. This suggests that the data is well-behaved, with team kills being distributed in a manner that is relatively balanced and typical for such gaming scenarios.
 
 ### Bivariate Analysis
 We permformed bivariate analysis on the first blood and result statistics in the dataset to visualize the distribution of teams that wins with the first kill.
