@@ -48,6 +48,7 @@ To save time in the further data cleaning steps, we first only keep the relevant
 Furthermore, among these columns, we find out that the column **‘minionkills’** have some missing values, and specifically there is one game that has all **‘minionkills’** entries as missing. Since there are still many other games in the dataset, we decide to simply drop this specific game. Moreover, the rest of the missing values in **‘minionkills’** are all coming from team rows. We write a helper function to impute these missing values by the total number of minions killed in that team in order to make it consistent with other non-missing values. 
 
 Below is the head of our league_clean dataframe.
+
 | gameid                | side   |   result |   kills |   deaths |   assists |   firstblood |   firstbloodkill |   team kpm | position   |   minionkills | league   |
 |:----------------------|:-------|---------:|--------:|---------:|----------:|-------------:|-----------------:|-----------:|:-----------|--------------:|:---------|
 | ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        3 |         2 |            0 |                0 |     0.3152 | top        |           220 | LCKC     |
