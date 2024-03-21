@@ -94,6 +94,102 @@ Here are some intersting aggregates to invest within the data set.
 We first groupby the cleaned data set with firstblood status and then calculate the sum of all statistics. By comparing the gaming statistics with and without first blood. We had a better visualization about the difference in statistics for teams with and without firstblood. The team with first blood has a better statistics: more winning, kills assist, team damages, minionkills and less deaths.
 
 ## Assessment of Missingness
+In this part, we are going to test if the missingness of **firstblood** column depends on other columns. The two other columns that we used are **league** and **result**. The significance level we choose for both permutation tests is 0.5, and the test statistic is Total Variance Distance (TVD).
+
+First, we perform the permutation test on **firstblood** and **league**, and the missingness of **firstblood** does depend on **league**. 
+
+Null Hypothesis: Distribution of **league** when **firstblood** is missing is the same as the distribution of **league** when **firstblood** is not missing.
+Alternative Hypothesis: Distribution of **league** when **firstblood** is missing is NOT same as the distribution of **league** when **firstblood** is not missing.
+
+Below is the observed distribution of **league** when **firstblood** is missing and not missing.
+
+| league     |   fb_missing = False |   fb_missing = True |
+|:-----------|---------------------:|--------------------:|
+| CBLOL      |           0.0222936  |          0          |
+| CBLOLA     |           0.0198165  |          0          |
+| CDF        |           0.00669725 |          0          |
+| CT         |           0.00238532 |          0          |
+| DCup       |           0.00117737 |          0.0423542  |
+| DDH        |           0.0191743  |          0          |
+| EBL        |           0.0169725  |          0          |
+| EL         |           0.0123853  |          0          |
+| ESLOL      |           0.0222018  |          0          |
+| EUM        |           0.0244954  |          0          |
+| GL         |           0.0159633  |          0          |
+| GLL        |           0.0186239  |          0          |
+| HC         |           0.0148624  |          0          |
+| HM         |           0.0140367  |          0          |
+| IC         |           0.00688073 |          0          |
+| LAS        |           0.0208257  |          0          |
+| LCK        |           0.042844   |          0          |
+| LCKC       |           0.0361468  |          0          |
+| LCL        |           0.00146789 |          0          |
+| LCO        |           0.0194495  |          0          |
+| LCS        |           0.0280734  |          0          |
+| LCSA       |           0.0495413  |          0          |
+| LDL        |           0.0143884  |          0.517602   |
+| LEC        |           0.0222936  |          0          |
+| LFL        |           0.0226606  |          0          |
+| LFL2       |           0.0221101  |          0          |
+| LHE        |           0.0222936  |          0          |
+| LJL        |           0.019633   |          0          |
+| LJLA       |           0.00348624 |          0          |
+| LLA        |           0.017156   |          0          |
+| LMF        |           0.0292661  |          0          |
+| LPL        |           0.0120183  |          0.432343   |
+| LPLOL      |           0.0191743  |          0          |
+| LVP SL     |           0.0224771  |          0          |
+| MSI        |           0.00733945 |          0          |
+| NEXO       |           0.0177064  |          0          |
+| NLC        |           0.0351376  |          0          |
+| PCS        |           0.0248624  |          0          |
+| PGC        |           0.0515596  |          0          |
+| PGN        |           0.0136697  |          0          |
+| PRM        |           0.0336697  |          0          |
+| SL (LATAM) |           0.0151376  |          0          |
+| TAL        |           0.0188073  |          0          |
+| TCL        |           0.0202752  |          0          |
+| UL         |           0.0223853  |          0          |
+| UPL        |           0.0377982  |          0          |
+| VCS        |           0.029633   |          0          |
+| VL         |           0.0155963  |          0          |
+| WLDs       |           0.0131498  |          0.00770077 |
+
+After we performed permutation tests, we found that the **observed statistic** for this permutation test is: 0.9647151320636651, and the **p-value** is 0. The plot below shows the empirical distribution of the TVD for the test.
+
+<iframe
+  src="assets/PerHist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Since the p-value is less than the 0.5 significance level, we reject the null hypothesis. Thus, the missingness of **firstblood** depends on the **league** column. 
+
+The second permutation test that we are performing is on **firstblood** and **result**, and the missingness of **firstblood** does not depend on **result**. 
+
+Null Hypothesis: Distribution of**result** when **firstblood** is missing is the same as the distribution of **result** when **firstblood** is not missing.
+Alternative Hypothesis: Distribution of **result** when **firstblood** is missing is NOT same as the distribution of **result** when **firstblood** is not missing.
+
+Below is the observed distribution of **result** when **firstblood** is missing and not missing.
+
+|   result |   fb_missing = False |   fb_missing = True |
+|---------:|---------------------:|--------------------:|
+|        0 |             0.500092 |                 0.5 |
+|        1 |             0.499908 |                 0.5 |
+
+After we performed permutation tests, we found that the **observed statistic** for this permutation test is: 9.174311926607448e-05, and the **p-value** is 0.99
+. The plot below shows the empirical distribution of the TVD for the test.
+
+<iframe
+  src="assets/FigNot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Since the p-value is greater than the 0.5 significance level, we fail to reject the null hypothesis. Thus, the missingness of **firstblood** does not depend on the **result** column. 
+
 ## Hypothesis Testing
 ## Framing a Prediction Problem
 ## Baseline Model
