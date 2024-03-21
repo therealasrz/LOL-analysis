@@ -44,9 +44,9 @@ In the dataset provided, we encounter various columns that encapsulate essential
 
 ## Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning
-To save time in the further data cleaning steps, we first only keep the relevant columns: 'gameid', **'side', 'result', 'kills', 'deaths', 'assists', 'firstblood', 'firstbloodkill', 'monsterkills', 'position', 'minionkills', 'league'**. In this dataset, each game has 12 rows, with 10 rows representing each of the players (i.e. player rows), and 2 rows for summarizing the overall team performance and result (i.e. team rows). We decide to keep all these rows, as they will be both utilized in the further analysis.
+To save time in the further data cleaning steps, we first only keep the relevant columns: 'gameid', `side`, `result`, `kills`, `deaths`, `assists`, `firstblood`, `firstbloodkill`, `monsterkills`, `position`, `minionkills`, `league`. In this dataset, each game has 12 rows, with 10 rows representing each of the players (i.e. player rows), and 2 rows for summarizing the overall team performance and result (i.e. team rows). We decide to keep all these rows, as they will be both utilized in the further analysis.
 
-Furthermore, among these columns, we find out that the column **‘minionkills’** have some missing values, and specifically there is one game that has all **‘minionkills’** entries as missing. Since there are still many other games in the dataset, we decide to simply drop this specific game. Moreover, the rest of the missing values in **‘minionkills’** are all coming from team rows. We write a helper function to impute these missing values by the total number of minions killed in that team in order to make it consistent with other non-missing values. 
+Furthermore, among these columns, we find out that the column `minionkills` have some missing values, and specifically there is one game that has all `minionkills` entries as missing. Since there are still many other games in the dataset, we decide to simply drop this specific game. Moreover, the rest of the missing values in `minionkills` are all coming from team rows. We write a helper function to impute these missing values by the total number of minions killed in that team in order to make it consistent with other non-missing values. 
 
 Below is the head of our league_clean dataframe.
 
@@ -233,6 +233,7 @@ At the time of prediction, we only know the following information for each playe
 For the baseline model, we used a Random Forest Classifier, with the following three features: kills, deaths, assists, and firstbloodkill. Among these four features, kills, deaths, and assists are quantitative, and we utilized StandardScaler Transformer to transform them into standard scale. The firstbloodkill is a nominal categorical variable, and it is already in binary form, thus we do not need to perform more encodings.
 
 After fitting the model, our accuracy score on the training data is **0.79454**. This means that our model is able to correctly predict **79.454%** of data. This accuracy score may sound really high, but it is quite misleading since our data is unbalanced. The F-1 score of this model is **7.913%** which is extremely low. Such a low F-1 score is due to a small Recall of 0.044336, as our model has many false negatives. Our model still has large improvement space, and we will improve it through adding more features, and tuning hyperparameters in the next section. 
+
 Here is our confuse matrix from the baseline model.
 <iframe
   src="assets/Matrix.html"
