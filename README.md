@@ -212,6 +212,22 @@ Here is a histogram containing the distribution of our test statistics during th
 With P-value of 0.0009990, we reject the null hypothesis. The distribution of kills for winning games for the team that gets the first blood is **NOT** the same as the team that does not get the first blood.
 
 ## Framing a Prediction Problem
+The model that we built are based on the following **prediction problem**: Are we able to predict if a player’s position is jungle or not based on their other game statistics? 
+
+In this part, we will need to one hot encode the original **position** column, and this will give us 5 binary columns representing each position: **position_top**, **position_jng**, **position_mid**, **position_bot*, **position_sup**.  Since we are predicting based on individual performance, we decide to drop all the team rows, and keep only the player rows. Thus, this is a **binary classfication model**, and our responsive variable is **position_jng**. Since we are only predicting if the given player is jungle or not, we can drop all other binary columns for position. The below is the head of DataFrame we are using in this section: 
+
+|   index |   kills |   deaths |   assists |   firstbloodkill |   team kpm |   minionkills |   position_jng |
+|--------:|--------:|---------:|----------:|-----------------:|-----------:|--------------:|---------------:|
+|       0 |       2 |        3 |         2 |                0 |     0.3152 |           220 |              0 |
+|       1 |       2 |        5 |         6 |                0 |     0.3152 |            33 |              1 |
+|       2 |       2 |        2 |         3 |                0 |     0.3152 |           177 |              0 |
+|       3 |       2 |        4 |         2 |                0 |     0.3152 |           208 |              0 |
+|       4 |       1 |        5 |         6 |                1 |     0.3152 |            42 |              0 |
+
+To prevent overfitting, the data will be split into two parts: 75% training data, and 25% test data. In terms of model’evaluation, we will use both accuracy and F1-score. The reason we are using F1-score on top of accuracy is because the data we are working on is unbalanced. In the DataFrame, 20% of the player’s positions are jungle, and 80% of players are some other positions; the accuracy score alone won’t give us a representative evaluation of the model. 
+
+At the time of prediction, we only know the following information for each player: ‘kills',  'deaths', 'assists', 'firstbloodkill', 'monsterkills', and  'minionkills'. These are all the statistics collected during the game. We will train our model based on the above features.
+
 ## Baseline Model
 ## Final Model
 ## Fairness Analysis
