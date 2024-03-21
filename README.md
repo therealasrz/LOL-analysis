@@ -60,7 +60,7 @@ Below is the head of our league_clean dataframe.
 *Note: The cleaned dataset here consists of all the columns we will need for both **hypothesis testing** and **prediction model**. When we get into each of the specific parts above, we will adjust this DataFrame further to make it compliant to our necessary steps.
 
 ### Univariate Analysis
-We permformed univariate Analysis on the kills in the dataset
+We permformed univariate analysis on the kill statistics in the dataset
 
 <iframe
   src="assets/TotalTeamKills.html"
@@ -72,6 +72,16 @@ We permformed univariate Analysis on the kills in the dataset
 The histogram shows that the distribution of team kills is nearly normal, slightly right skewed. The data in general is well-behaved!
 
 ### Bivariate Analysis
+We permformed bivariate analysis on the first blood and result statistics in the dataset to visualize the distribution of teams that wins with the first kill.
+
+<iframe
+  src="assets/PieChart.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+According to the plot, teams with first blood has a win rate about 60%. A 60% win rate implies that the majority of teams that secure the first blood end up winning the match, indicating that securing the first kill provides a strategic advantage that contributes to overall success.
 
 ### Interesting Aggregates
 
