@@ -210,7 +210,7 @@ Here is a histogram containing the distribution of our test statistics during th
   frameborder="0"
 ></iframe>
 
-With P-value of 0.0009990, we reject the null hypothesis. The distribution of kills for winning games for the team that gets the first blood is **NOT** the same as the team that does not get the first blood.
+Based on the hypothesis test performed, with a **p-value** of **0.0009990**, we **reject** the null hypothesis. This suggests that the distribution of kills for winning games for the team that secures the first blood is NOT the same as the team that does not get the first blood. This finding indicates that securing the first blood may indeed have a significant impact on the gameplay dynamics and overall success of the team in League of Legends matches.
 
 ## Framing a Prediction Problem
 The model that we built are based on the following **prediction problem**: Are we able to predict if a player’s position is jungle or not based on their other game statistics? 
