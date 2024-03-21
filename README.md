@@ -191,6 +191,25 @@ After we performed permutation tests, we found that the **observed statistic** f
 Since the p-value is greater than the 0.5 significance level, we fail to reject the null hypothesis. Thus, the missingness of **firstblood** does not depend on the **result** column. 
 
 ## Hypothesis Testing
+In the hypothesis test, we aim to assess whether there is a significant difference in the distribution of kills for winning games between the team that secures the first blood and the team that does not. This investigation is crucial for understanding the relationship between securing the first blood in a League of Legends match and the subsequent gameplay dynamics, particularly in terms of kill distribution among winning teams.
+
+**Null**: The distribution of kills for winning games for the team that gets the first blood is the same as the team that does not get the first blood. 
+
+**Alternative**: The distribution of kills for winning games for the team that gets the first blood is NOT the same as the team that does not get the first blood.
+
+**Test Statistics**: Absolute mean difference between teams in kills with and without first kills,
+
+**Significance Level**: 5%
+Here is a histogram containing the distribution of our test statistics during the hypothesis test:
+
+<iframe
+  src="assets/HypoHist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+With P-value of 0.0009990, we reject the null hypothesis. The distribution of kills for winning games for the team that gets the first blood is **NOT** the same as the team that does not get the first blood.
 
 ## Framing a Prediction Problem
 ## Baseline Model
