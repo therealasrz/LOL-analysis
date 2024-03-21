@@ -72,6 +72,17 @@ We permformed univariate analysis on the kill statistics in the dataset
 
 The histogram shows that the distribution of team kills is nearly normal, slightly right skewed. This suggests that the data is well-behaved, with team kills being distributed in a manner that is relatively balanced and typical for such gaming scenarios.
 
+We also plot a graph for the dirstribution of monsterkills in the data set.
+
+<iframe
+  src="assets/MonHist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The histogram shows that the distribution of monsterkills is nearly normal. This suggests that the data is well-behaved, with monsterkills being distributed in a manner that is relatively balanced and serves as good statistics for analysing player behavior.
+
 ### Bivariate Analysis
 We permformed bivariate analysis on the first blood and result statistics in the dataset to visualize the distribution of teams that wins with the first kill.
 
