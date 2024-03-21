@@ -60,6 +60,7 @@ Below is the head of our league_clean dataframe.
 *Note: The cleaned dataset here consists of all the columns we will need for both **hypothesis testing** and **prediction model**. When we get into each of the specific parts above, we will adjust this DataFrame further to make it compliant to our necessary steps.
 
 ### Univariate Analysis
+We permformed univariate Analysis on the kills in the dataset
 
 <iframe
   src="assets/TotalTeamKills.html"
@@ -67,6 +68,8 @@ Below is the head of our league_clean dataframe.
   height="600"
   frameborder="0"
 ></iframe>
+
+The histogram shows that the distribution of team kills is nearly normal, slightly right skewed. The data in general is well-behaved!
 
 ### Bivariate Analysis
 
