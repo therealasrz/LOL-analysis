@@ -50,13 +50,13 @@ Furthermore, among these columns, we find out that the column `minionkills` have
 
 Below is the head of our league_clean dataframe.
 
-| gameid                | side   |   result |   kills |   deaths |   assists |   firstblood |   firstbloodkill |   team kpm | position   |   minionkills | league   |
-|:----------------------|:-------|---------:|--------:|---------:|----------:|-------------:|-----------------:|-----------:|:-----------|--------------:|:---------|
-| ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        3 |         2 |            0 |                0 |     0.3152 | top        |           220 | LCKC     |
-| ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        5 |         6 |            1 |                0 |     0.3152 | jng        |            33 | LCKC     |
-| ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        2 |         3 |            0 |                0 |     0.3152 | mid        |           177 | LCKC     |
-| ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        4 |         2 |            1 |                0 |     0.3152 | bot        |           208 | LCKC     |
-| ESPORTSTMNT01_2690210 | Blue   |        0 |       1 |        5 |         6 |            1 |                1 |     0.3152 | sup        |            42 | LCKC     |
+| gameid                | side   |   result |   kills |   deaths |   assists |   firstblood |   firstbloodkill |   monsterkills | position   |   minionkills | league   |
+|:----------------------|:-------|---------:|--------:|---------:|----------:|-------------:|-----------------:|---------------:|:-----------|--------------:|:---------|
+| ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        3 |         2 |            0 |                0 |             11 | top        |           220 | LCKC     |
+| ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        5 |         6 |            1 |                0 |            115 | jng        |            33 | LCKC     |
+| ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        2 |         3 |            0 |                0 |             16 | mid        |           177 | LCKC     |
+| ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        4 |         2 |            1 |                0 |             18 | bot        |           208 | LCKC     |
+| ESPORTSTMNT01_2690210 | Blue   |        0 |       1 |        5 |         6 |            1 |                1 |              0 | sup        |            42 | LCKC     |
 
 *Note: The cleaned dataset here consists of all the columns we will need for both **hypothesis testing** and **prediction model**. When we get into each of the specific parts above, we will adjust this DataFrame further to make it compliant to our necessary steps.
 
