@@ -95,9 +95,9 @@ Here are some intersting aggregates to invest within the data set.
 We first groupby the cleaned data set with firstblood status and then calculate the sum of all statistics. By comparing the gaming statistics with and without first blood. We had a better visualization about the difference in statistics for teams with and without firstblood. The team with first blood has a better statistics: more winning, kills assist, team damages, minionkills and less deaths.
 
 ## Assessment of Missingness
-In this part, we are going to test if the missingness of **firstblood** column depends on other columns. The two other columns that we used are **league** and **result**. The significance level we choose for both permutation tests is 0.5, and the test statistic is Total Variance Distance (TVD).
+In this part, we are going to test if the missingness of **firstblood** column depends on other columns. The two other columns that we used are `league` and `result`. The significance level we choose for both permutation tests is 0.5, and the test statistic is Total Variance Distance (TVD).
 
-First, we perform the permutation test on **firstblood** and **league**, and the missingness of **firstblood** does depend on **league**. 
+First, we perform the permutation test on `firstblood` and `league`, and the missingness of `firstblood` does depend on `league`. 
 
 Null Hypothesis: Distribution of **league** when **firstblood** is missing is the same as the distribution of **league** when **firstblood** is not missing.
 Alternative Hypothesis: Distribution of **league** when **firstblood** is missing is NOT same as the distribution of **league** when **firstblood** is not missing.
@@ -172,7 +172,7 @@ The second permutation test that we are performing is on **firstblood** and **re
 Null Hypothesis: Distribution of**result** when **firstblood** is missing is the same as the distribution of **result** when **firstblood** is not missing.
 Alternative Hypothesis: Distribution of **result** when **firstblood** is missing is NOT same as the distribution of **result** when **firstblood** is not missing.
 
-Below is the observed distribution of **result** when **firstblood** is missing and not missing.
+Below is the observed distribution of `result` when `firstblood` is missing and not missing.
 
 |   result |   fb_missing = False |   fb_missing = True |
 |---------:|---------------------:|--------------------:|
