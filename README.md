@@ -231,7 +231,7 @@ At the time of prediction, we only know the following information for each playe
 ## Baseline Model
 For the baseline model, we used a Random Forest Classifier, with the following three features: kills, deaths, assists, and firstbloodkill. Among these four features, kills, deaths, and assists are quantitative, and we utilized StandardScaler Transformer to transform them into standard scale. The firstbloodkill is a nominal categorical variable, and it is already in binary form, thus we do not need to perform more encodings.
 
-After fitting the model, our accuracy score on the training data is 0.79454. This means that our model is able to correctly predict 79.454% of data. This accuracy score may sound really high, but it is quite misleading since our data is unbalanced. The F-1 score of this model is 7.913% which is extremely low. Such a low F-1 score is due to a small Recall of 0.044336, as our model has many false negatives. Our model still has large improvement space, and we will improve it through adding more features, and tuning hyperparameters in the next section. 
+After fitting the model, our accuracy score on the training data is **0.79454**. This means that our model is able to correctly predict **79.454%** of data. This accuracy score may sound really high, but it is quite misleading since our data is unbalanced. The F-1 score of this model is **7.913%** which is extremely low. Such a low F-1 score is due to a small Recall of 0.044336, as our model has many false negatives. Our model still has large improvement space, and we will improve it through adding more features, and tuning hyperparameters in the next section. 
 
 ## Final Model
 ## Fairness Analysis
