@@ -19,7 +19,7 @@ In the dataset provided, we encounter various columns that encapsulate essential
 
 - **gameid**: This column represents a unique identifier for each individual match played. It allows us to distinguish between different matches in the dataset.
 
-- **side**: The 'side' column denotes the team affiliation of a particular player or team. It typically distinguishes between 'blue' and 'red' teams, providing insights into the team dynamics and matchups within a match.
+- **side**: The 'side' column denotes the team affiliation of a particular player or team. It typically distinguishes between 'blue' and 'red' teams.
 
 - **result**: This column indicates the outcome of a match for a specific team or player. It may denote whether the team won, lost, or if the match ended in a draw.
 
