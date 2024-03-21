@@ -58,7 +58,12 @@ Below is the head of our league_clean dataframe.
 
 *Note: The cleaned dataset here consists of all the columns we will need for both **hypothesis testing** and **prediction model**. When we get into each of the specific parts above, we will adjust this DataFrame further to make it compliant to our necessary steps.
 
-### Exploratory Data Analysis
+### Univariate Analysis
+
+### Bivariate Analysis
+
+### Interesting Aggregates
+
 ## Assessment of Missingness
 ## Hypothesis Testing
 ## Framing a Prediction Problem
