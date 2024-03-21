@@ -1,6 +1,6 @@
-# League of Legends FirstBlood Statistical Analysis
+# League of Legends First Blood Statistical Analysis
 
-League of Legends FirstBlood Statistical Analysis is a comprehensive data science project conducted at UCSD. The project encompasses various stages of analysis, starting from exploratory data analysis to hypothesis testing, creation of baseline models, and concluding with fairness analysis. The primary focus of the project is to investigate the significance of the "first blood" event in League of Legends matches and its impact on match statistics and outcomes.
+League of Legends First Blood Statistical Analysis is a comprehensive data science project conducted at UCSD. The project encompasses various stages of analysis, starting from exploratory data analysis to hypothesis testing, creation of baseline models, and concluding with fairness analysis. The primary focus of the project is to investigate the significance of the "first blood" event in League of Legends matches and its impact on match statistics and outcomes.
 
 Authors: Sirui Zhang, Jingxiao Qiu
 
@@ -12,7 +12,7 @@ This dataset captures key gameplay statistics and outcomes from a collection of 
 
 In the realm of League of Legends (LOL), the concept of **"first blood"** holds significant weight and serves as an important trajectory of a match. First blood refers to the initial first kill secured by a team during the early stages of a game. Beyond its immediate impact on the scoreboard, first blood sets the tone for the ensuing gameplay, often shaping the general dynamics, strategies, and outcomes of the match.
 
-The central question we are interested in is **In what degree of effectiveness does the firstblood status has to other gaming statistics in the data set**. We want to use data analysis techniques to testify the impact of first blood on gaming statistics,  including individual player performance, team strategies, in-game metrics, and ultimately, match outcomes. 
+The central question we are interested in is **In what degree of effectiveness does the firstblood status has to other gaming statistics in the data set**. We want to use data analysis techniques to testify the impact of first blood on gaming statistics,  including individual player performance, team strategies, in-game metrics, and ultimately, match outcomes. And therefore using these statistics to set up a prediction model to predict the positions of the players. This predictive model holds immense potential to enhance strategic decision-making, optimize team compositions, and elevate overall gameplay experience.
 
 ### Introduction of Columns
 The dataset introduces a comprehensive array of columns featuring gameplay metrics and match outcomes from professional League of Legends esports matches. Here's an introduction to some of the key columns:
@@ -277,15 +277,4 @@ The followings are our hypothesis:
 
 **Test statistics**: difference in prediction between individuals who have monsterkills less than or greater than 100
 
-Here is a histogram for our test statistics:
-
-<iframe
-  src="assets/DiffHist.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
-
-Only a small percentage of data is smaller than the observed value.
-
-After performing the permutation test, the result p-value we got is 0.798, which is larger than the 0.05 significance level. Consequently, we **fail to reject** the null hypothesis. This suggests that our model predicts players from both groups with statistically similar accuracy. Therefore, our model appears to be fair, as it does not exhibit any significant bias towards one group over the other based on the given criteria.
+After performing the permutation test, the result p-value we got is **0.798**, which is larger than the 0.05 significance level. Consequently, we **fail to reject** the null hypothesis. This outcome implies that our model predicts players from both groups with statistically similar accuracy levels. Consequently, our model appears to be fair, exhibiting no discernible bias towards one group over the other based on the specified criteria.
