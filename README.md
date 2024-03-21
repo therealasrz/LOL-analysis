@@ -214,7 +214,7 @@ With P-value of 0.0009990, we reject the null hypothesis. The distribution of ki
 ## Framing a Prediction Problem
 The model that we built are based on the following **prediction problem**: Are we able to predict if a player’s position is jungle or not based on their other game statistics? 
 
-In this part, we will need to one hot encode the original **position** column, and this will give us 5 binary columns representing each position: **position_top**, **position_jng**, **position_mid**, **position_bot*, **position_sup**.  Since we are predicting based on individual performance, we decide to drop all the team rows, and keep only the player rows. Thus, this is a **binary classfication model**, and our responsive variable is **position_jng**. Since we are only predicting if the given player is jungle or not, we can drop all other binary columns for position. The below is the head of DataFrame we are using in this section: 
+In this part, we will need to one hot encode the original **position** column, and this will give us 5 binary columns representing each position: **position_top**, **position_jng**, **position_mid**, **position_bot**, **position_sup**.  Since we are predicting based on individual performance, we decide to drop all the team rows, and keep only the player rows. Thus, this is a **binary classfication model**, and our responsive variable is **position_jng**. Since we are only predicting if the given player is jungle or not, we can drop all other binary columns for position. The below is the head of DataFrame we are using in this section: 
 
 |   index |   kills |   deaths |   assists |   firstbloodkill |   team kpm |   minionkills |   position_jng |
 |--------:|--------:|---------:|----------:|-----------------:|-----------:|--------------:|---------------:|
@@ -229,5 +229,9 @@ To prevent overfitting, the data will be split into two parts: 75% training data
 At the time of prediction, we only know the following information for each player: ‘kills',  'deaths', 'assists', 'firstbloodkill', 'monsterkills', and  'minionkills'. These are all the statistics collected during the game. We will train our model based on the above features.
 
 ## Baseline Model
+For the baseline model, we used a Random Forest Classifier, with the following three features: kills, deaths, assists, and firstbloodkill. Among these four features, kills, deaths, and assists are quantitative, and we utilized StandardScaler Transformer to transform them into standard scale. The firstbloodkill is a nominal categorical variable, and it is already in binary form, thus we do not need to perform more encodings.
+
+After fitting the model, our accuracy score on the training data is 0.79454. This means that our model is able to correctly predict 79.454% of data. This accuracy score may sound really high, but it is quite misleading since our data is unbalanced. The F-1 score of this model is 7.913% which is extremely low. Such a low F-1 score is due to a small Recall of 0.044336, as our model has many false negatives. Our model still has large improvement space, and we will improve it through adding more features, and tuning hyperparameters in the next section. 
+
 ## Final Model
 ## Fairness Analysis
