@@ -33,7 +33,7 @@ In the dataset provided, we encounter various columns that encapsulate essential
 
 - **firstbloodkill**: Similar to 'firstblood', this binary column specifically denotes whether a player or team secured the first kill of the match, thereby earning the distinction of 'first blood.'
 
-- **team kpm**: 'Team kpm' stands for 'kills per minute' and represents the average rate at which a team secures kills over the duration of the match. It provides insights into the team's offensive capabilities and overall aggression.
+- **team kpm**: 'Team kpm' stands for 'kills per minute' and represents the average rate at which a team secures kills over the duration of the match. 
 
 - **position**: The 'position' column specifies the role or position played by an individual player within their team composition. Common positions include 'top,' 'jungle,' 'mid,' 'bot,' and 'support.'
 
