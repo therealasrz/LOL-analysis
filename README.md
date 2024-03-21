@@ -84,6 +84,14 @@ We permformed bivariate analysis on the first blood and result statistics in the
 According to the plot, teams with first blood has a win rate about 60%. A 60% win rate implies that the majority of teams that secure the first blood end up winning the match, indicating that securing the first kill provides a strategic advantage that contributes to overall success.
 
 ### Interesting Aggregates
+Here are some intersting aggregates to invest within the data set. 
+
+|   firstblood |   result |   kills |   deaths |   assists |   team kpm |   minionkills |
+|-------------:|---------:|--------:|---------:|----------:|-----------:|--------------:|
+|            0 |     4873 |  159125 |   201307 |    360525 |    5032.85 |   1.84307e+07 |
+|            1 |     7540 |  200452 |   158989 |    441953 |    6531.28 |   1.85042e+07 |
+
+We first groupby the cleaned data set with firstblood status and then calculate the sum of all statistics. By comparing the gaming statistics with and without first blood. We had a better visualization about the difference in statistics for teams with and without firstblood. The team with first blood has a better statistics: more winning, kills assist, team damages, minionkills and less deaths.
 
 ## Assessment of Missingness
 ## Hypothesis Testing
