@@ -110,9 +110,9 @@ In this part, we are going to test if the missingness of `firstblood` column dep
 
 First, we perform the permutation test on `firstblood` and `league`, and the missingness of `firstblood` does depend on `league`. 
 
-Null Hypothesis: Distribution of `league` when `firstblood` is missing is the same as the distribution of `league` when `firstblood` is not missing.
+**Null Hypothesis**: Distribution of `league` when `firstblood` is missing is the same as the distribution of `league` when `firstblood` is not missing.
 
-Alternative Hypothesis: Distribution of `league` when `firstblood` is missing is NOT same as the distribution of `league` when `firstblood` is not missing.
+**Alternative Hypothesis**: Distribution of `league` when `firstblood` is missing is NOT same as the distribution of `league` when `firstblood` is not missing.
 
 Below is the observed distribution of `league` when `firstblood` is missing and not missing.
 
