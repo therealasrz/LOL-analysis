@@ -1,7 +1,7 @@
 # League of Legends FirstBlood Statistical Analysis
 A data science project at UCSD that performs Exploratory Data Analysis, Hypothesis test, creating Baseline Models and fiannly performing fairness analysis on real-life gaming data from League of Legends.
 
-Authors: Jingxiao Qiu, Sirui Zhang
+Authors: Sirui Zhang, Jingxiao Qiu
 
 ## Introduction
 ### General Introduction
