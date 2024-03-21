@@ -201,6 +201,7 @@ In the hypothesis test, we aim to assess whether there is a significant differen
 **Test Statistics**: Absolute mean difference between teams in kills with and without first kills,
 
 **Significance Level**: 5%
+
 Here is a histogram containing the distribution of our test statistics during the hypothesis test:
 
 <iframe
