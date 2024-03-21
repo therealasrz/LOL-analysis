@@ -191,6 +191,7 @@ After we performed permutation tests, we found that the **observed statistic** f
 Since the p-value is greater than the 0.5 significance level, we fail to reject the null hypothesis. Thus, the missingness of **firstblood** does not depend on the **result** column. 
 
 ## Hypothesis Testing
+
 ## Framing a Prediction Problem
 ## Baseline Model
 ## Final Model
