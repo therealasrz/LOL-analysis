@@ -44,7 +44,7 @@ In the dataset provided, we encounter various columns that encapsulate essential
 
 ## Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning
-To save time in the further data cleaning steps, we first only keep the relevant columns: 'gameid', `side`, `result`, `kills`, `deaths`, `assists`, `firstblood`, `firstbloodkill`, `monsterkills`, `position`, `minionkills`, `league`. In this dataset, each game has 12 rows, with 10 rows representing each of the players (i.e. player rows), and 2 rows for summarizing the overall team performance and result (i.e. team rows). We decide to keep all these rows, as they will be both utilized in the further analysis.
+To save time in the further data cleaning steps, we first only keep the relevant columns: `gameid`, `side`, `result`, `kills`, `deaths`, `assists`, `firstblood`, `firstbloodkill`, `monsterkills`, `position`, `minionkills`, `league`. In this dataset, each game has 12 rows, with 10 rows representing each of the players (i.e. player rows), and 2 rows for summarizing the overall team performance and result (i.e. team rows). We decide to keep all these rows, as they will be both utilized in the further analysis.
 
 Furthermore, among these columns, we find out that the column `minionkills` have some missing values, and specifically there is one game that has all `minionkills` entries as missing. Since there are still many other games in the dataset, we decide to simply drop this specific game. Moreover, the rest of the missing values in `minionkills` are all coming from team rows. We write a helper function to impute these missing values by the total number of minions killed in that team in order to make it consistent with other non-missing values. 
 
@@ -95,9 +95,9 @@ Here are some intersting aggregates to invest within the data set.
 We first groupby the cleaned data set with firstblood status and then calculate the sum of all statistics. By comparing the gaming statistics with and without first blood. We had a better visualization about the difference in statistics for teams with and without firstblood. The team with first blood has a better statistics: more winning, kills assist, team damages, minionkills and less deaths.
 
 ## Assessment of Missingness
-In this part, we are going to test if the missingness of **firstblood** column depends on other columns. The two other columns that we used are `league` and `result`. The significance level we choose for both permutation tests is 0.5, and the test statistic is Total Variance Distance (TVD).
+In this part, we are going to test if the missingness of `firstblood` column depends on other columns. The two other columns that we used are `league` and `result`. The significance level we choose for both permutation tests is 0.5, and the test statistic is Total Variance Distance (TVD).
 
-First, we perform the permutation test on `firstblood` and `league`, and the missingness of `firstblood` does depend on `league`. 
+First, we perform the permutation test on **firstblood** and **league**, and the missingness of **firstblood** does depend on **league**. 
 
 Null Hypothesis: Distribution of **league** when **firstblood** is missing is the same as the distribution of **league** when **firstblood** is not missing.
 Alternative Hypothesis: Distribution of **league** when **firstblood** is missing is NOT same as the distribution of **league** when **firstblood** is not missing.
