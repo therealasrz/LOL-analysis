@@ -265,9 +265,9 @@ Our final model also uses a random forest classifier in alignment with the basel
 The accuracy score is now **0.9993**, meaning our model is able to correctly predict **99.93%** of our data. This score is super high! If we now take a look into the F-1 score, it is 99.83%, meaning both of our precision and recall are close to 1. We have achieved huge improvement in both evaluation metrics, and this improvement suggests that our adjustment to the model is effective in terms of prediction power.
 
 ## Fairness Analysis
-In this section, we are going to assess if our model is fair among different groups. The question we are trying to answer here is: “ does my model perform worse for individuals who have monsterkills less than or equal to 100 than it does for individuals who have monster kills greater than 100? To answer this question, we performed a permutation test and examined the resulting histogram of the difference in accuracy between the two groups. 
+In this section, we are going to assess if our model is fair among different groups. The question we are trying to answer here is: **“ does my model perform worse for individuals who have monsterkills less than or equal to 100 than it does for individuals who have monster kills greater than 100?** To answer this question, we performed a permutation test and examined the resulting histogram of the difference in accuracy between the two groups. 
 
-The group X represents the players who have monsterkills less than or equal to 100, and group Y represents those who have monster kills greater than 100. Our evaluation metric is accuracy, and the significance level is 0.05. 
+The group `X` represents the players who have monsterkills less than or equal to 100, and group `Y` represents those who have monster kills greater than 100. Our evaluation metric is accuracy, and the significance level is 0.05. 
 
 The followings are our hypothesis:
 **Null hypothesis**: Our model’s accuracy for individuals who have less than or equal to 100 monsterkills is same as the accuracy for individuals who have greater than 100 monsterkills.
@@ -285,4 +285,4 @@ Here is a histogram for our test statistics:
 
 Only a small percentage of data is smaller than the observed value.
 
-After performing the permutation test, the result p-value we got is 0.798, which is larger than the 0.05 significance level. Consequently, we fail to reject the null hypothesis. This suggests that our model predicts players from both groups with statistically similar accuracy. Therefore, our model appears to be fair, as it does not exhibit any significant bias towards one group over the other based on the given criteria.
+After performing the permutation test, the result p-value we got is 0.798, which is larger than the 0.05 significance level. Consequently, we **fail to reject** the null hypothesis. This suggests that our model predicts players from both groups with statistically similar accuracy. Therefore, our model appears to be fair, as it does not exhibit any significant bias towards one group over the other based on the given criteria.
