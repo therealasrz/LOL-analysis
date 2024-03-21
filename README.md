@@ -270,8 +270,11 @@ In this section, we are going to assess if our model is fair among different gro
 The group `X` represents the players who have monsterkills less than or equal to 100, and group `Y` represents those who have monster kills greater than 100. Our evaluation metric is accuracy, and the significance level is 0.05. 
 
 The followings are our hypothesis:
+
 **Null hypothesis**: Our model’s accuracy for individuals who have less than or equal to 100 monsterkills is same as the accuracy for individuals who have greater than 100 monsterkills.
+
 **Alternative hypothesis**: Our model’s accuracy for individuals who have less than or equal to 100 monsterkills is NOT same as the accuracy for individuals who have greater than 100 monsterkills.
+
 **Test statistics**: difference in prediction between individuals who have monsterkills less than or greater than 100
 
 Here is a histogram for our test statistics:
