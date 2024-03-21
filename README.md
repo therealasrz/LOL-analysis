@@ -42,6 +42,23 @@ In the dataset provided, we encounter various columns that encapsulate essential
 - **league**: The 'league' column denotes the specific league tournament in which the match took place.
 
 ## Data Cleaning and Exploratory Data Analysis
+### Data Cleaning
+To save time in the further data cleaning steps, we first only keep the relevant columns: 'gameid', **'side', 'result', 'kills', 'deaths', 'assists', 'firstblood', 'firstbloodkill', 'team kpm', 'position', 'minionkills', 'league'**. In this dataset, each game has 12 rows, with 10 rows representing each of the players (i.e. player rows), and 2 rows for summarizing the overall team performance and result (i.e. team rows). We decide to keep all these rows, as they will be both utilized in the further analysis.
+
+Furthermore, among these columns, we find out that the column **‘minionkills’** have some missing values, and specifically there is one game that has all **‘minionkills’** entries as missing. Since there are still many other games in the dataset, we decide to simply drop this specific game. Moreover, the rest of the missing values in **‘minionkills’** are all coming from team rows. We write a helper function to impute these missing values by the total number of minions killed in that team in order to make it consistent with other non-missing values. 
+
+Below is the head of our league_clean dataframe.
+| gameid                | side   |   result |   kills |   deaths |   assists |   firstblood |   firstbloodkill |   team kpm | position   |   minionkills | league   |
+|:----------------------|:-------|---------:|--------:|---------:|----------:|-------------:|-----------------:|-----------:|:-----------|--------------:|:---------|
+| ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        3 |         2 |            0 |                0 |     0.3152 | top        |           220 | LCKC     |
+| ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        5 |         6 |            1 |                0 |     0.3152 | jng        |            33 | LCKC     |
+| ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        2 |         3 |            0 |                0 |     0.3152 | mid        |           177 | LCKC     |
+| ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        4 |         2 |            1 |                0 |     0.3152 | bot        |           208 | LCKC     |
+| ESPORTSTMNT01_2690210 | Blue   |        0 |       1 |        5 |         6 |            1 |                1 |     0.3152 | sup        |            42 | LCKC     |
+
+*Note: The cleaned dataset here consists of all the columns we will need for both **hypothesis testing** and **prediction model**. When we get into each of the specific parts above, we will adjust this DataFrame further to make it compliant to our necessary steps.
+
+### Exploratory Data Analysis
 ## Assessment of Missingness
 ## Hypothesis Testing
 ## Framing a Prediction Problem
