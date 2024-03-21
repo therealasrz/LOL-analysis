@@ -62,7 +62,7 @@ Below is the head of our league_clean dataframe.
 ### Univariate Analysis
 
 <iframe
-  src="assets/figure.html"
+  src="assets/TotalTeamKills.html"
   width="800"
   height="600"
   frameborder="0"
