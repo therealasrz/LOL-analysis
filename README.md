@@ -33,7 +33,7 @@ In the dataset provided, we encounter various columns that encapsulate essential
 
 - **firstbloodkill**: Similar to 'firstblood', this binary column specifically denotes whether a player or team secured the first kill of the match, thereby earning the distinction of 'first blood.'
 
-- **team kpm**: 'Team kpm' stands for 'kills per minute' and represents the average rate at which a team secures kills over the duration of the match. 
+- **monsterkills**: the number of monsters or neutral objectives slain by a team or player during a game. These monsters can include jungle camps, epic monsters like Baron Nashor or the Dragon, as well as other neutral objectives such as Rift Herald or elemental drakes. The number of monster kills can be indicative of a team's control over the map, their ability to secure key objectives, and their overall dominance in the game.
 
 - **position**: The 'position' column specifies the role or position played by an individual player within their team composition. Common positions include 'top,' 'jungle,' 'mid,' 'bot,' and 'support.'
 
@@ -43,7 +43,7 @@ In the dataset provided, we encounter various columns that encapsulate essential
 
 ## Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning
-To save time in the further data cleaning steps, we first only keep the relevant columns: 'gameid', **'side', 'result', 'kills', 'deaths', 'assists', 'firstblood', 'firstbloodkill', 'team kpm', 'position', 'minionkills', 'league'**. In this dataset, each game has 12 rows, with 10 rows representing each of the players (i.e. player rows), and 2 rows for summarizing the overall team performance and result (i.e. team rows). We decide to keep all these rows, as they will be both utilized in the further analysis.
+To save time in the further data cleaning steps, we first only keep the relevant columns: 'gameid', **'side', 'result', 'kills', 'deaths', 'assists', 'firstblood', 'firstbloodkill', 'monsterkills', 'position', 'minionkills', 'league'**. In this dataset, each game has 12 rows, with 10 rows representing each of the players (i.e. player rows), and 2 rows for summarizing the overall team performance and result (i.e. team rows). We decide to keep all these rows, as they will be both utilized in the further analysis.
 
 Furthermore, among these columns, we find out that the column **‘minionkills’** have some missing values, and specifically there is one game that has all **‘minionkills’** entries as missing. Since there are still many other games in the dataset, we decide to simply drop this specific game. Moreover, the rest of the missing values in **‘minionkills’** are all coming from team rows. We write a helper function to impute these missing values by the total number of minions killed in that team in order to make it consistent with other non-missing values. 
 
