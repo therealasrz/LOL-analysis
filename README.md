@@ -44,9 +44,9 @@ In the dataset provided, we encounter various columns that encapsulate essential
 
 ## Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning
-To save time in the further data cleaning steps, we first only keep the relevant columns: `gameid`, `side`, `result`, `kills`, `deaths`, `assists`, `firstblood`, `firstbloodkill`, `monsterkills`, `position`, `minionkills`, `league`. In this dataset, each game has 12 rows, with 10 rows representing each of the players (i.e. player rows), and 2 rows for summarizing the overall team performance and result (i.e. team rows). We decide to keep all these rows, as they will be both utilized in the further analysis.
+To save time in the further data cleaning steps, we first only keep the relevant columns: `gameid`, `side`, `result`, `kills`, `deaths`, `assists`, `firstblood`, `firstbloodkill`, `monsterkills`, `position`, `minionkills`, `league`. In this dataset, each game has 12 rows, with 10 rows representing each of the players (i.e. player rows), and 2 rows for summarizing the overall team performance and result (i.e. team summary rows). We decide to keep all these rows, as they will be both utilized in the further analysis.
 
-Furthermore, among these columns, we find out that the column `minionkills` have some missing values, and specifically there is one game that has all `minionkills` entries as missing. Since there are still many other games in the dataset, we decide to simply drop this specific game. Moreover, the rest of the missing values in `minionkills` are all coming from team rows. We write a helper function to impute these missing values by the total number of minions killed in that team in order to make it consistent with other non-missing values. 
+Furthermore, among these columns, we find out that the column `minionkills` have some missing values, and specifically there is one game that has all `minionkills` entries as missing. Since there are still many other games in the dataset, we decide to simply drop this specific game. Moreover, the rest of the missing values in `minionkills` are all coming from team summary rows. We write a helper function to impute these missing values by the total number of minions killed in that team in order to make it consistent with other non-missing values. 
 
 Below is the head of our league_clean dataframe.
 
@@ -108,12 +108,12 @@ We first groupby the cleaned data set with firstblood status and then calculate 
 ## Assessment of Missingness
 In this part, we are going to test if the missingness of `firstblood` column depends on other columns. The two other columns that we used are `league` and `result`. The significance level we choose for both permutation tests is 0.5, and the test statistic is Total Variance Distance (TVD).
 
-First, we perform the permutation test on **firstblood** and **league**, and the missingness of **firstblood** does depend on **league**. 
+First, we perform the permutation test on `firstblood` and `league`, and the missingness of `firstblood` does depend on `league`. 
 
-Null Hypothesis: Distribution of **league** when **firstblood** is missing is the same as the distribution of **league** when **firstblood** is not missing.
-Alternative Hypothesis: Distribution of **league** when **firstblood** is missing is NOT same as the distribution of **league** when **firstblood** is not missing.
+Null Hypothesis: Distribution of `league` when `firstblood` is missing is the same as the distribution of `league` when `firstblood` is not missing.
+Alternative Hypothesis: Distribution of `league` when `firstblood` is missing is NOT same as the distribution of `league` when `firstblood` is not missing.
 
-Below is the observed distribution of **league** when **firstblood** is missing and not missing.
+Below is the observed distribution of `league` when `firstblood` is missing and not missing.
 
 | league     |   fb_missing = False |   fb_missing = True |
 |:-----------|---------------------:|--------------------:|
@@ -176,12 +176,12 @@ After we performed permutation tests, we found that the **observed statistic** f
   frameborder="0"
 ></iframe>
 
-Since the p-value is less than the 0.5 significance level, we reject the null hypothesis. Thus, the missingness of **firstblood** depends on the **league** column. 
+Since the p-value is less than the 0.5 significance level, we reject the null hypothesis. Thus, the missingness of `firstblood` depends on the `league` column. 
 
-The second permutation test that we are performing is on **firstblood** and **result**, and the missingness of **firstblood** does not depend on **result**. 
+The second permutation test that we are performing is on `firstblood` and `result`, and the missingness of `firstblood` does not depend on `result`. 
 
-Null Hypothesis: Distribution of**result** when **firstblood** is missing is the same as the distribution of **result** when **firstblood** is not missing.
-Alternative Hypothesis: Distribution of **result** when **firstblood** is missing is NOT same as the distribution of **result** when **firstblood** is not missing.
+Null Hypothesis: Distribution of `result` when `firstblood` is missing is the same as the distribution of `result` when `firstblood` is not missing.
+Alternative Hypothesis: Distribution of `result` when `firstblood` is missing is NOT same as the distribution of `result` when `firstblood` is not missing.
 
 Below is the observed distribution of `result` when `firstblood` is missing and not missing.
 
@@ -200,7 +200,7 @@ After we performed permutation tests, we found that the **observed statistic** f
   frameborder="0"
 ></iframe>
 
-Since the p-value is greater than the 0.5 significance level, we fail to reject the null hypothesis. Thus, the missingness of **firstblood** does not depend on the **result** column. 
+Since the p-value is greater than the 0.5 significance level, we fail to reject the null hypothesis. Thus, the missingness of `firstblood` does not depend on the `result` column. 
 
 ## Hypothesis Testing
 In the hypothesis test, we aim to assess whether there is a significant difference in the distribution of kills for winning games between the team that secures the first blood and the team that does not. This investigation is crucial for understanding the relationship between securing the first blood in a League of Legends match and the subsequent gameplay dynamics, particularly in terms of kill distribution among winning teams.
@@ -225,9 +225,11 @@ Here is a histogram containing the distribution of our test statistics during th
 Based on the hypothesis test performed, with a **p-value** of **0.0009990**, we **reject** the null hypothesis. This suggests that the distribution of kills for winning games for the team that secures the first blood is NOT the same as the team that does not get the first blood. This finding indicates that securing the first blood may indeed have a significant impact on the gameplay dynamics and overall success of the team in League of Legends matches.
 
 ## Framing a Prediction Problem
-The model that we built are based on the following **prediction problem**: Are we able to predict if a player’s position is jungle or not based on their other game statistics? 
+From the last section, we found out that getting first blood will affect the team kills. Since the statistics for each team could be so different, are there any specific characteristics for each position in terms of in-game statistics? In other words, can we know a player’s position by looking at their in-game statistics, like first blood kill, or other features like deaths, assists, etc.? 
 
-In this part, we will need to one hot encode the original **position** column, and this will give us 5 binary columns representing each position: **position_top**, **position_jng**, **position_mid**, **position_bot**, **position_sup**.  Since we are predicting based on individual performance, we decide to drop all the team rows, and keep only the player rows. Thus, this is a **binary classfication model**, and our responsive variable is **position_jng**. Since we are only predicting if the given player is jungle or not, we can drop all other binary columns for position. The below is the head of DataFrame we are using in this section: 
+For our prediction model, we will focus on the jungle position only. Thus, at here, the model that we built are based on the following **prediction problem**: Are we able to predict if a player’s position is jungle or not based on their other game statistics? 
+
+In this part, we will need to one hot encode the original `position` column, and this will give us 5 binary columns representing each position: `position_top`, `position_jng`, `position_mid`, `position_bot`, `position_sup`.  Since we are predicting based on individual performance, we decide to drop all the team rows, and keep only the player rows. Thus, this is a `binary classfication model`, and our responsive variable is `position_jng`. Since we are only predicting if the given player is jungle or not, we can drop all other binary columns for position. The below is the head of DataFrame we are using in this section: 
 
 |   index |   kills |   deaths |   assists |   firstbloodkill |   team kpm |   minionkills |   position_jng |
 |--------:|--------:|---------:|----------:|-----------------:|-----------:|--------------:|---------------:|
@@ -239,10 +241,10 @@ In this part, we will need to one hot encode the original **position** column, a
 
 To prevent overfitting, the data will be split into two parts: 75% training data, and 25% test data. In terms of model’evaluation, we will use both accuracy and F1-score. The reason we are using F1-score on top of accuracy is because the data we are working on is unbalanced. In the DataFrame, 20% of the player’s positions are jungle, and 80% of players are some other positions; the accuracy score alone won’t give us a representative evaluation of the model. 
 
-At the time of prediction, we only know the following information for each player: ‘kills',  'deaths', 'assists', 'firstbloodkill', 'monsterkills', and  'minionkills'. These are all the statistics collected during the game. We will train our model based on the above features.
+At the time of prediction, we only know the following information for each player: `kills`,  `deaths`, `assists`, `firstbloodkill`, `monsterkills`, and  `minionkills`. These are all the statistics collected during the game. We will train our model based on the above features.
 
 ## Baseline Model
-For the baseline model, we used a Random Forest Classifier, with the following three features: kills, deaths, assists, and firstbloodkill. Among these four features, kills, deaths, and assists are quantitative, and we utilized StandardScaler Transformer to transform them into standard scale. The firstbloodkill is a nominal categorical variable, and it is already in binary form, thus we do not need to perform more encodings.
+For the baseline model, we used a Random Forest Classifier, with the following three features: `kills`, `deaths`, `assists`, and `firstbloodkill`. Among these four features, kills, deaths, and assists are quantitative, and we utilized StandardScaler Transformer to transform them into standard scale. The firstbloodkill is a nominal categorical variable, and it is already in binary form, thus we do not need to perform more encodings.
 
 After fitting the model, our accuracy score on the training data is **0.79454**. This means that our model is able to correctly predict **79.454%** of data. This accuracy score may sound really high, but it is quite misleading since our data is unbalanced. The F-1 score of this model is **7.913%** which is extremely low. Such a low F-1 score is due to a small Recall of 0.044336, as our model has many false negatives. Our model still has large improvement space, and we will improve it through adding more features, and tuning hyperparameters in the next section. 
 
@@ -255,9 +257,9 @@ Here is our confuse matrix from the baseline model.
 ></iframe>
 
 ## Final Model
-In our final model, we added two more features: **monsterkills** and **minionkills**. We are adding these two features into our model because we believe in the LOL game, the champions in jungle positions usually have higher damage, so they are able to kill more minions compared to other positions at the same amount of time. Moreover, the main job of the jungle position in the game is to kill the monsters, so we believe jungle positions should have a relatively high **monsterkills** number. Additionally, **minion kills** reflect a player's ability to efficiently farm gold and experience, which are crucial for scaling and gaining advantages in the game. Therefore, we expect that both monster kills and minion kills will provide valuable predictive power in our final model, allowing us to better understand the factors influencing victory in League of Legends matches.
+In our final model, we added two more features: `monsterkills` and `minionkills`. We are adding these two features into our model because we believe in the LOL game, the champions in jungle positions usually have higher damage, so they are able to kill more minions compared to other positions at the same amount of time. Moreover, the main job of the jungle position in the game is to kill the monsters, so we believe jungle positions should have a relatively high `monsterkills` number. Additionally, `minion kills` reflect a player's ability to efficiently farm gold and experience, which are crucial for scaling and gaining advantages in the game. Therefore, we expect that both monster kills and minion kills will provide valuable predictive power in our final model, allowing us to better understand the factors influencing victory in League of Legends matches.
 
-Our final model also uses a random forest classifier in alignment with the baseline model. The two additional features we added (**monsterkills** and **minionkills**) are both quantitative features, so we used StandardScaler Transformer to perform encodings of these two columns. In terms of tuning hyperparameters, the two hyperparameters we chose are: max depth and the number of estimators for the random forest classifier. We are testing max depth of 2 through 200, with each of 20 steps. For the number of estimators, we are testing from 2 to 100, with each of 10 steps. Using the technique of grid search to find the best hyperparameters, we found out that the best max depth is 22 and the best number of estimators is also 22. 
+Our final model also uses a random forest classifier in alignment with the baseline model. The two additional features we added (`monsterkills` and `minionkills`) are both quantitative features, so we used StandardScaler Transformer to perform encodings of these two columns. In terms of tuning hyperparameters, the two hyperparameters we chose are: max depth and the number of estimators for the random forest classifier. We are testing max depth of 2 through 200, with each of 20 steps. For the number of estimators, we are testing from 2 to 100, with each of 10 steps. Using the technique of grid search to find the best hyperparameters, we found out that the best max depth is 22 and the best number of estimators is also 22. 
 
 The accuracy score is now 0.9993, meaning our model is able to correctly predict 99.93% of our data. This score is super high! If we now take a look into the F-1 score, it is 99.83%, meaning both of our precision and recall are close to 1. We have achieved huge improvement in both evaluation metrics, and this improvement suggests that our adjustment to the model is effective in terms of prediction power.
 
