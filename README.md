@@ -191,7 +191,7 @@ Below is the observed distribution of `result` when `firstblood` is missing and 
 |        0 |             0.500092 |                 0.5 |
 |        1 |             0.499908 |                 0.5 |
 
-After we performed permutation tests, we found that the **observed statistic** for this permutation test is: 9.174311926607448e-05, and the **p-value** is 0.99
+After we performed permutation tests, we found that the **observed statistic** for this permutation test is: 9.174311926607448e-05, and the **p-value** is 0.98
 . The plot below shows the empirical distribution of the TVD for the test.
 
 <iframe
@@ -247,17 +247,17 @@ At the time of prediction, we only know the following information for each playe
 ## Baseline Model
 For the baseline model, we used a Random Forest Classifier, with the following three features: `kills`, `deaths`, `assists`, and `firstbloodkill`. Among these four features, kills, deaths, and assists are quantitative, and we utilized StandardScaler Transformer to transform them into standard scale. The firstbloodkill is a nominal categorical variable, and it is already in binary form, thus we do not need to perform more encodings.
 
-After fitting the model, our accuracy score on the training data is **0.79454**. This means that our model is able to correctly predict **79.454%** of data. This accuracy score may sound really high, but it is quite misleading since our data is unbalanced. The F-1 score of this model is **7.913%** which is extremely low. Such a low F-1 score is due to a small Recall of 0.044336, as our model has many false negatives. Our model still has large improvement space, and we will improve it through adding more features, and tuning hyperparameters in the next section. 
+After fitting the model, our accuracy score on the training data is **0.79**. This means that our model is able to correctly predict **79%** of data. This accuracy score may sound really high, but it is quite misleading since our data is unbalanced. The F-1 score of this model is **7.9%** which is extremely low. Such a low F-1 score is due to a small Recall of 0.044, as our model has many false negatives. Our model still has large improvement space, and we will improve it through adding more features, and tuning hyperparameters in the next section. 
 
 ## Final Model
 In our final model, we added two more features: `monsterkills` and `minionkills`. We are adding these two features into our model because we believe in the LOL game, the champions in jungle positions usually have higher damage, so they are able to kill more minions compared to other positions at the same amount of time. Moreover, the main job of the jungle position in the game is to kill the monsters, so we believe jungle positions should have a relatively high `monsterkills` number. Additionally, `minion kills` reflect a player's ability to efficiently farm gold and experience, which are crucial for scaling and gaining advantages in the game. Therefore, we expect that both monster kills and minion kills will provide valuable predictive power in our final model, allowing us to better understand the factors influencing victory in League of Legends matches.
 
-Our final model also uses a random forest classifier in alignment with the baseline model. The two additional features we added (`monsterkills` and `minionkills`) are both quantitative features, so we used StandardScaler Transformer to perform encodings of these two columns. In terms of tuning hyperparameters, the two hyperparameters we chose are: max depth and the number of estimators for the random forest classifier. We are testing max depth of 2 through 200, with each of 20 steps. For the number of estimators, we are testing from 2 to 100, with each of 10 steps. Using the technique of grid search to find the best hyperparameters, we found out that the best max depth is 22 and the best number of estimators is also 22. 
+Our final model also uses a random forest classifier in alignment with the baseline model. The two additional features we added (`monsterkills` and `minionkills`) are both quantitative features, so we used StandardScaler Transformer to perform encodings of these two columns. In terms of tuning hyperparameters, the two hyperparameters we chose are: max depth and the number of estimators for the random forest classifier. We are testing max depth of 2 through 200, with each of 20 steps. For the number of estimators, we are testing from 2 to 100, with each of 10 steps. Using the technique of grid search to find the best hyperparameters, we found out that the best max depth is 22 and the best number of estimators is also 32. 
 
 The accuracy score is now **0.9993**, meaning our model is able to correctly predict **99.93%** of our data. This score is super high! If we now take a look into the F-1 score, it is 99.83%, meaning both of our precision and recall are close to 1. We have achieved huge improvement in both evaluation metrics, and this improvement suggests that our adjustment to the model is effective in terms of prediction power.
 
 ## Fairness Analysis
-In this section, we are going to assess if our model is fair among different groups. The question we are trying to answer here is: **“ does my model perform worse for individuals who have monsterkills less than or equal to 100 than it does for individuals who have monster kills greater than 100?** To answer this question, we performed a permutation test and examined the resulting histogram of the difference in accuracy between the two groups. 
+In this section, we are going to assess if our model is fair among different groups. The question we are trying to answer here is: **“does my model perform worse for individuals who have monsterkills less than or equal to 100 than it does for individuals who have monster kills greater than 100?"** To answer this question, we performed a permutation test and examined the result of the difference in accuracy between the two groups. 
 
 The group `X` represents the players who have monsterkills less than or equal to 100, and group `Y` represents those who have monster kills greater than 100. Our evaluation metric is accuracy, and the significance level is 0.05. 
 
@@ -267,6 +267,6 @@ The followings are our hypothesis:
 
 **Alternative hypothesis**: Our model’s accuracy for individuals who have less than or equal to 100 monsterkills is NOT same as the accuracy for individuals who have greater than 100 monsterkills.
 
-**Test statistics**: difference in prediction between individuals who have monsterkills less than or greater than 100
+**Test statistics**: difference in prediction between individuals who have monsterkills less than or greater than 100.
 
-After performing the permutation test, the result p-value we got is **0.798**, which is larger than the 0.05 significance level. Consequently, we **fail to reject** the null hypothesis. This outcome implies that our model predicts players from both groups with statistically similar accuracy levels. Consequently, our model appears to be fair, exhibiting no discernible bias towards one group over the other based on the specified criteria.
+After performing the permutation test, the result p-value we got is **0.942**, which is larger than the 0.05 significance level. Consequently, we **fail to reject** the null hypothesis. This outcome implies that our model predicts players from both groups with statistically similar accuracy levels. Consequently, our model appears to be fair, exhibiting no discernible bias towards one group over the other based on the specified criteria.
