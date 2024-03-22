@@ -2,7 +2,7 @@
 
 League of Legends First Blood Statistical Analysis is a comprehensive data science project conducted at UCSD. The project encompasses various stages of analysis, starting from exploratory data analysis to hypothesis testing, creation of baseline models, and concluding with fairness analysis. The primary focus of the project is to investigate the significance of the "first blood" event in League of Legends matches and its impact on match statistics and outcomes.
 
-Authors: Sirui Zhang, Jingxiao Qiu
+Authors: Sirui Zhang, Krystal Qiu
 
 ## Introduction
 ### General Introduction
