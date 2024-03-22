@@ -106,6 +106,13 @@ Here are some intersting aggregates to invest within the data set.
 We first groupby the cleaned data set with firstblood status and then calculate the sum of all statistics. By comparing the gaming statistics with and without first blood. We had a better visualization about the difference in statistics for teams with and without firstblood. The team with first blood has a better statistics: more winning, kills assist, team damages, minionkills and less deaths.
 
 ## Assessment of Missingness
+
+### NMAR Analysis
+
+In our data, we believe the columns `ban1`, `ban2`, `ban3`, `ban4`, `ban5` are all Not Missing At Random (NMAR). Looking into the columns, we see that all these 5 columns do not have any specific trends of missing, or any evidence of depending on other columns. In the actual League of Legends game, the players can decide by themselves if they want to ban any champion or not. In this case, we believe this is NMAR because these missing values appear when the players choose not to ban any champion, and this means the missingness of these values actually depends on themselves. 
+
+### Missingness Dependency
+
 In this part, we are going to test if the missingness of `firstblood` column depends on other columns. The two other columns that we used are `league` and `result`. The significance level we choose for both permutation tests is 0.5, and the test statistic is Total Variance Distance (TVD).
 
 First, we perform the permutation test on `firstblood` and `league`, and the missingness of `firstblood` does depend on `league`. 
