@@ -15,14 +15,14 @@ In the realm of League of Legends (LOL), the concept of **"first blood"** holds 
 The central question we are interested in is **In what degree of effectiveness does the firstblood status has to other gaming statistics in the data set**. We want to use data analysis techniques to testify the impact of first blood on gaming statistics,  including individual player performance, team strategies, in-game metrics, and ultimately, match outcomes. And therefore using these statistics to set up a prediction model to predict the positions of the players. This predictive model holds immense potential to enhance strategic decision-making, optimize team compositions, and elevate overall gameplay experience.
 
 ### Introduction of Columns
-The dataset introduces a comprehensive array of columns featuring gameplay metrics and match outcomes from professional League of Legends esports matches. Here's an introduction to some of the key columns:
+The dataset introduces a comprehensive array of columns featuring gameplay metrics and match outcomes from professional League of Legends esports matches. Ther are 148992 rows in this dataset, and here's an introduction to some of the key columns:
 In the dataset provided, we encounter various columns that encapsulate essential gameplay statistics and match outcomes from professional League of Legends (LoL) esports matches. Here's a brief introduction to each of these columns:
 
 - `gameid`: This column represents a unique identifier for each individual match played. It allows us to distinguish between different matches in the dataset.
 
 - `side`: The 'side' column denotes the team affiliation of a particular player or team. It typically distinguishes between 'blue' and 'red' teams.
 
-- `result`: This column indicates the outcome of a match for a specific team or player. It may denote whether the team won, lost, or if the match ended in a draw.
+- `result`: This column indicates the outcome of a match for a specific team or player. 1 indicates the team or the team that the player is in won, 0 indicates lost.
 
 - `kills`: The 'kills' column quantifies the number of enemy champions a player or team successfully eliminated during the match. 
 
@@ -30,8 +30,8 @@ In the dataset provided, we encounter various columns that encapsulate essential
 
 - `assists`: The 'assists' column records the number of assists credited to a player or team, indicating instances where they contributed to eliminating an enemy champion without securing the kill themselves.
 
-- `firstblood`: This binary column indicates whether the occurrence of the first blood event took place in the match. First blood refers to the first instance of a player or team securing a kill in the game.
-
+- `firstblood`: This binary column indicates 1 if a player gets the first blood, or assists to get the first blood.
+- 
 - `firstbloodkill`: Similar to 'firstblood', this binary column specifically denotes whether a player or team secured the first kill of the match, thereby earning the distinction of 'first blood.'
 
 - `monsterkills`: the number of monsters or neutral objectives slain by a team or player during a game. These monsters can include jungle camps, epic monsters like Baron Nashor or the Dragon, as well as other neutral objectives such as Rift Herald or elemental drakes. The number of monster kills can be indicative of a team's control over the map, their ability to secure key objectives, and their overall dominance in the game.
@@ -58,7 +58,7 @@ Below is the head of our league_clean dataframe.
 | ESPORTSTMNT01_2690210 | Blue   |        0 |       2 |        4 |         2 |            1 |                0 |             18 | bot        |           208 | LCKC     |
 | ESPORTSTMNT01_2690210 | Blue   |        0 |       1 |        5 |         6 |            1 |                1 |              0 | sup        |            42 | LCKC     |
 
-*Note: The cleaned dataset here consists of all the columns we will need for both **hypothesis testing** and **prediction model**. When we get into each of the specific parts above, we will adjust this DataFrame further to make it compliant to our necessary steps.
+*Note: The cleaned dataset here consists of all the columns we will need for both **hypothesis testing** and **prediction model**. When we get into each of the specific parts below, we will adjust this DataFrame further to make it compliant to our necessary steps.
 
 ### Univariate Analysis
 We permformed univariate analysis on the kill statistics in the dataset
@@ -84,7 +84,7 @@ We also plot a graph for the dirstribution of monsterkills in the data set.
 The histogram shows that the distribution of monsterkills is nearly normal. This suggests that the data is well-behaved, with monsterkills being distributed in a manner that is relatively balanced and serves as good statistics for analysing player behavior.
 
 ### Bivariate Analysis
-We permformed bivariate analysis on the first blood and result statistics in the dataset to visualize the distribution of teams that wins with the first kill.
+We permformed bivariate analysis on the first blood and result statistics in the dataset to visualize among all the winning teams, how many them gets the first blood.
 
 <iframe
   src="assets/PieChart.html"
@@ -109,7 +109,7 @@ We first groupby the cleaned data set with firstblood status and then calculate 
 
 ### NMAR Analysis
 
-In our data, we believe the columns `ban1`, `ban2`, `ban3`, `ban4`, `ban5` are all Not Missing At Random (NMAR). Looking into the columns, we see that all these 5 columns do not have any specific trends of missing, or any evidence of depending on other columns. In the actual League of Legends game, the players can decide by themselves if they want to ban any champion or not. In this case, we believe this is NMAR because these missing values appear when the players choose not to ban any champion, and this means the missingness of these values actually depends on themselves. 
+In our data, we believe the columns `ban1`, `ban2`, `ban3`, `ban4`, `ban5` are all Not Missing At Random (NMAR). Looking into the columns, we see that all these 5 columns do not have any specific trends of missing, or any evidence of depending on other columns. In the actual League of Legends game, the players can decide by themselves if they want to ban any champion or not. In this case, we believe this is NMAR because these missing values appear when the players choose not to ban any champion, and this means the missingness of these values actually depends on themselves.  An additional data we would obtain to make these columns Missing at Random (MAR) is `all_banned`, which has 1 indicating all players have banned a champion, and 0 indicating at least 1 player in the team forgetting to ban.
 
 ### Missingness Dependency
 
@@ -188,8 +188,9 @@ Since the p-value is less than the 0.5 significance level, we reject the null hy
 
 The second permutation test that we are performing is on `firstblood` and `result`, and the missingness of `firstblood` does not depend on `result`. 
 
-Null Hypothesis: Distribution of `result` when `firstblood` is missing is the same as the distribution of `result` when `firstblood` is not missing.
-Alternative Hypothesis: Distribution of `result` when `firstblood` is missing is NOT same as the distribution of `result` when `firstblood` is not missing.
+**Null Hypothesis**: Distribution of `result` when `firstblood` is missing is the same as the distribution of `result` when `firstblood` is not missing.
+
+**Alternative Hypothesis**: Distribution of `result` when `firstblood` is missing is NOT same as the distribution of `result` when `firstblood` is not missing.
 
 Below is the observed distribution of `result` when `firstblood` is missing and not missing.
 
@@ -230,14 +231,14 @@ Here is a histogram containing the distribution of our test statistics during th
   frameborder="0"
 ></iframe>
 
-Based on the hypothesis test performed, with a **p-value** of **0.0009990**, we **reject** the null hypothesis. This suggests that the distribution of kills for winning games for the team that secures the first blood is NOT the same as the team that does not get the first blood. This finding indicates that securing the first blood may indeed have a significant impact on the gameplay dynamics and overall success of the team in League of Legends matches.
+Based on the hypothesis test performed, with a **p-value** of **0.0009990**, we **reject** the null hypothesis. This suggests that the distribution of kills for winning games for the team that secures the first blood is NOT the same as the team that does not get the first blood. This finding leads us to consider that securing the first blood may indeed have a significant impact on the gameplay dynamics and overall success of the team in League of Legends matches.
 
 ## Framing a Prediction Problem
-From the last section, we found out that getting first blood does have a significant impact on the team kills. Since the statistics for each team could be so different, are there any specific characteristics for each position in terms of in-game statistics? In other words, is it possible to predict a player's position solely by analyzing their in-game statistics, such as first blood kills, deaths, assists, and other relevant features?
+From the last section, we found out that getting first blood may have a significant impact on the team kills. Since the statistics for each team could be so different, are there any specific characteristics for each position in terms of in-game statistics? In other words, is it possible to predict a player's position solely by analyzing their in-game statistics, such as first blood kills, deaths, assists, and other relevant features?
 
 To address this question, we can employ machine learning techniques such as classification algorithms. For our prediction model, we will focus on the jungle position only. Thus, at here, the model that we built are based on the following **prediction problem**: Are we able to predict if a player’s position is jungle or not based on their other game statistics? 
 
-In this part, we will need to one hot encode the original `position` column, and this will give us 5 binary columns representing each position: `position_top`, `position_jng`, `position_mid`, `position_bot`, `position_sup`.  Since we are predicting based on individual performance, we decide to drop all the team rows, and keep only the player rows. Thus, this is a `binary classfication model`, and our responsive variable is `position_jng`. Since we are only predicting if the given player is jungle or not, we can drop all other binary columns for position. The below is the head of DataFrame we are using in this section: 
+In this part, we will need to one-hot encode the original `position` column, and this will give us 5 binary columns representing each position: `position_top`, `position_jng`, `position_mid`, `position_bot`, `position_sup`.  Since we are predicting based on individual performance, we decide to drop all the team summary rows, and keep only the player rows. Thus, this is a `binary classfication model`, and our responsive variable is `position_jng`. As we are only predicting if the given player is jungle or not, we can drop all other binary columns for position. Below is the head of DataFrame we are using in this section: 
 
 |   index |   kills |   deaths |   assists |   firstbloodkill |   team kpm |   minionkills |   position_jng |
 |--------:|--------:|---------:|----------:|-----------------:|-----------:|--------------:|---------------:|
@@ -252,16 +253,16 @@ To prevent overfitting, the data will be split into two parts: 75% training data
 At the time of prediction, we only know the following information for each player: `kills`,  `deaths`, `assists`, `firstbloodkill`, `monsterkills`, and  `minionkills`. These are all the statistics collected during the game. We will train our model based on the above features.
 
 ## Baseline Model
-For the baseline model, we used a Random Forest Classifier, with the following three features: `kills`, `deaths`, `assists`, and `firstbloodkill`. Among these four features, kills, deaths, and assists are quantitative, and we utilized StandardScaler Transformer to transform them into standard scale. The firstbloodkill is a nominal categorical variable, and it is already in binary form, thus we do not need to perform more encodings.
+For the baseline model, we used a Random Forest Classifier, with the following four features: `kills`, `deaths`, `assists`, and `firstbloodkill`. Among these four features, three of them are quantitative: `kills`, `deaths`, and `assists`. We utilized StandardScaler Transformer to transform them into standard scale. The last one `firstbloodkill` is a nominal categorical variable, and it is already in binary form, thus we do not need to perform more encodings.
 
-After fitting the model, our accuracy score on the training data is **0.79**. This means that our model is able to correctly predict **79%** of data. This accuracy score may sound really high, but it is quite misleading since our data is unbalanced. The F-1 score of this model is **7.9%** which is extremely low. Such a low F-1 score is due to a small Recall of 0.044, as our model has many false negatives. Our model still has large improvement space, and we will improve it through adding more features, and tuning hyperparameters in the next section. 
+After fitting the model, our accuracy score on the training data is **0.7953**. This means that our model is able to correctly predict **79.53%** of data. This accuracy score may sound really high, but it is quite misleading since our data is unbalanced. The F-1 score of this model is **8.71%** which is extremely low. Such a low F-1 score is due to a low Recall of 0.049, as our model has many false negatives. Our model still has large improvement space, and we will improve it through adding more features, and tuning hyperparameters in the next section. 
 
 ## Final Model
-In our final model, we added two more features: `monsterkills` and `minionkills`. We are adding these two features into our model because we believe in the LOL game, the champions in jungle positions usually have higher damage, so they are able to kill more minions compared to other positions at the same amount of time. Moreover, the main job of the jungle position in the game is to kill the monsters, so we believe jungle positions should have a relatively high `monsterkills` number. Additionally, `minion kills` reflect a player's ability to efficiently farm gold and experience, which are crucial for scaling and gaining advantages in the game. Therefore, we expect that both monster kills and minion kills will provide valuable predictive power in our final model, allowing us to better understand the factors influencing victory in League of Legends matches.
+In our final model, we added two more features: `monsterkills` and `minionkills`. We are adding these two features into our model because we believe in the LOL game, the champions in jungle positions usually have higher damage, so they are able to kill more minions compared to other positions at the same amount of time. Moreover, the main job of the jungle position in the game is to kill the monsters, so we believe jungle positions should have a relatively high `monsterkills` number. Additionally, `minion kills` reflect a player's ability to efficiently farm gold and experience, which are crucial for scaling and gaining advantages in the game. Therefore, we expect that both `monsterkills` and `minionkills` will provide valuable predictive power in our final model, allowing us to better understand the factors influencing victory in League of Legends matches.
 
-Our final model also uses a random forest classifier in alignment with the baseline model. The two additional features we added (`monsterkills` and `minionkills`) are both quantitative features, so we used StandardScaler Transformer to perform encodings of these two columns. In terms of tuning hyperparameters, the two hyperparameters we chose are: max depth and the number of estimators for the random forest classifier. We are testing max depth of 2 through 200, with each of 20 steps. For the number of estimators, we are testing from 2 to 100, with each of 10 steps. Using the technique of grid search to find the best hyperparameters, we found out that the best max depth is 22 and the best number of estimators is also 32. 
+Our final model also uses a Random Forest Classifier in alignment with the baseline model. The two additional features we added (`monsterkills` and `minionkills`) are both quantitative features, so we used StandardScaler Transformer to perform encodings of these two columns. In terms of tuning hyperparameters, the two hyperparameters we chose are: max depth and the number of estimators for the random forest classifier. We are testing max depth of 2 through 200, with each of 20 steps. For the number of estimators, we are testing from 2 to 100, with each of 10 steps. Using the technique of grid search to find the best hyperparameters, we found out that the best max depth is 42 and the best number of estimators is also 82. 
 
-The accuracy score is now **0.9993**, meaning our model is able to correctly predict **99.93%** of our data. This score is super high! If we now take a look into the F-1 score, it is 99.83%, meaning both of our precision and recall are close to 1. We have achieved huge improvement in both evaluation metrics, and this improvement suggests that our adjustment to the model is effective in terms of prediction power.
+The accuracy score is now **0.9994**, meaning our model is able to correctly predict **99.94%** of our data. This score is super high! If we now take a look into the F-1 score, it is 99.86%, meaning both of our precision and recall are close to 1. We have achieved huge improvement in both evaluation metrics, and this improvement suggests that our adjustment to the model is effective in terms of prediction power.
 
 ## Fairness Analysis
 In this section, we are going to assess if our model is fair among different groups. The question we are trying to answer here is: **“does my model perform worse for individuals who have monsterkills less than or equal to 100 than it does for individuals who have monster kills greater than 100?"** To answer this question, we performed a permutation test and examined the result of the difference in accuracy between the two groups. 
@@ -270,10 +271,10 @@ The group `X` represents the players who have monsterkills less than or equal to
 
 The followings are our hypothesis:
 
-**Null hypothesis**: Our model’s accuracy for individuals who have less than or equal to 100 monsterkills is same as the accuracy for individuals who have greater than 100 monsterkills.
+**Null hypothesis**: Our model is fair. Its accuracy for players who have less than or equal to 100 monsterkills is same as the accuracy for players who have greater than 100 monsterkills.
 
-**Alternative hypothesis**: Our model’s accuracy for individuals who have less than or equal to 100 monsterkills is NOT same as the accuracy for individuals who have greater than 100 monsterkills.
+**Alternative hypothesis**: Our model is unfair. Its accuracy for players who have less than or equal to 100 monsterkills is NOT same as the accuracy for players who have greater than 100 monsterkills.
 
-**Test statistics**: difference in prediction between individuals who have monsterkills less than or greater than 100.
+**Test statistics**: difference in accuracy between individuals who have monsterkills less than or greater than 100.
 
-After performing the permutation test, the result p-value we got is **0.942**, which is larger than the 0.05 significance level. Consequently, we **fail to reject** the null hypothesis. This outcome implies that our model predicts players from both groups with statistically similar accuracy levels. Consequently, our model appears to be fair, exhibiting no discernible bias towards one group over the other based on the specified criteria.
+After performing the permutation test, the result p-value we got is **0.924**, which is larger than the 0.05 significance level. Consequently, we **fail to reject** the null hypothesis. This outcome implies that our model predicts players from both groups with statistically similar accuracy levels. Consequently, our model appears to be fair, exhibiting no discernible bias towards one group over the other based on the specified criteria.
